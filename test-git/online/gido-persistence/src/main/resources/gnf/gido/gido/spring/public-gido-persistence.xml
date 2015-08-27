@@ -1,0 +1,16 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+        	http://www.springframework.org/schema/jee 
+	        http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+	<!-- architecture configuration -->
+	<jee:jndi-lookup id="dataSource" jndi-name="gido-datasource" />
+
+	<import resource="classpath*:gnf/**/template-persistence.xml" />
+
+</beans>

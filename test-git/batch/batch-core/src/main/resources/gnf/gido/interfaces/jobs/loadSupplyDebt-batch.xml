@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/batch 
+    http://www.springframework.org/schema/batch/spring-batch-2.1.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <description>Carga los suministros con deuda en la tabla GID-MOROSOS-NIS desde el fichero</description>
+    
+    <context:annotation-config />     
+
+    <!--
+        El trabajo. Lleva una propiedad "incrementer" que indica que el
+        batch se pueda ejecutar diferentes veces, incrementando un id
+        para cada instancia del trabajo (run.id)... si no se pone, no se
+        puede volver a ejecutar con los mismos parámetros, haciendo
+        único (non-restartable) el trabajo.
+    -->
+
+	<job id="gidoLoadSupplyDebtJob" restartable="true" xmlns="http://www.springframework.org/schema/batch" 
+		incrementer="jobParametersIncrementer" >
+        
+           <step id="gidoLoadSupplyDebtStep" >
+            <tasklet transaction-manager="transactionManager">
+                <chunk reader="gidoLoadSupplyDebtReader" writer="gidoLoadSupplyDebtWriter" commit-interval="100" />
+				<listeners>
+					<listener ref="skipListener" />
+				</listeners>	                
+            </tasklet>
+       	   </step>
+       	   
+       	   <listeners merge="true">
+				<listener ref="log4jlistener"/>
+			</listeners>       	 
+        
+    </job>
+    
+    
+   <!--Reader -->
+
+   <bean id="gidoLoadSupplyDebtReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+	<!--<property name="resource" value="file:${gccb.path.files.greenBook}/TbEnti.txt" /> -->
+        <property name="resource" value="file:D:\GIDO-COLOMBIA\EXT_MOROSOS_NIS.DAT" />
+        <property name="encoding" value="UTF-8"/>
+        <property name="lineMapper">
+            <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">              
+                <property name="lineTokenizer">
+                    <bean
+                        class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+                        <property name="delimiter" value="|" />
+                        <property name="names"
+                            value="nis_rad,nic,deuda,facturas,est_deuda,f_vencim,deuda_30d,fact_30d,deuda_60d,fact_60d,
+	  							   deuda_90d,fact_90d,deuda_120d,fact_120d,deuda_150d,fact_150d,deuda_180d,fact_180d,deuda_210d,
+	   							   fact_210d,deuda_240d,fact_240d,deuda_270,fact_270d,deuda_300d,fact_300d,deuda_330d,fact_330d,
+	   							   deuda_360d,fact_360d,deuda_390d,fact_390d,fact,deuda_420d,fact_420d,deuda_450d,fact_450d,
+	   							   deuda_480d,fact_480d,deuda_510d,fact_510d,deuda_540d,fact_540d,deuda_700d,fact_700d,deuda_900d,
+	   							  fact_900d,deuda_1080d,fact_1080d,deduda_1460d,fact_1460d,deuda_1825d,fact_1825d,fact_mayor_1825d" />
+                    </bean>
+                </property>
+                <property name="fieldSetMapper" ref="gccbGreenBookMapper" />
+            </bean>
+        </property>        
+    </bean>
+    
+     <bean id="gidoLoadSupplyDebMapper" class="gnf.gps.facturacioncobro.cobro.batch.internal.mapper.GccbGreenBookMapper" />
+    
+    	<!-- Step1 -->
+	<bean id="gidoLoadSupplyDebtWriter"
+		class="gnf.gido.interfaces.batch.steps.writers.GidoLoadSupplyDebWriter" 
+		scope="step" 
+	 />
+	 
+	 <bean id="log4jlistener" class="gnf.ada.batch.listener.Log4jJobListener" />
+    
+</beans>

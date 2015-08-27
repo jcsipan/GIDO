@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- groupId and version from parent POM -->
+	<artifactId>gido-war</artifactId>
+	<packaging>war</packaging>
+	<name>gido</name>
+
+	<parent>
+		<groupId>gnf.gido</groupId>
+		<artifactId>gido-online</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<!-- service layer dependencies -->
+		<dependency>
+			<groupId>gnf.gido</groupId>
+			<artifactId>gido-services</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- client layer dependencies -->
+		<dependency>
+			<groupId>gnf.gido</groupId>
+			<artifactId>gido-ui</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.name}</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<configuration>
+						<warName>${project.build.finalName}</warName>
+						
+						<webResources>
+					    	<resource>
+					    		<directory>${basedir}/src/main/webapp</directory>
+					    		<filtering>true</filtering>
+					    		<targetPath>.</targetPath>
+					    		<includes>
+					    			<include>version.xml</include>
+					    		</includes>
+					    	</resource>
+					    </webResources>
+					    
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		
+	</build>
+
+	<profiles>
+		<profile>
+			<id>weblogic</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.oracle.weblogic</groupId>
+						<artifactId>weblogic-maven-plugin</artifactId>
+						<configuration>
+							<name>${application.name}</name>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>verify</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<profile>
+			<id>weblogic-undeploy</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.oracle.weblogic</groupId>
+						<artifactId>weblogic-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>verify</phase>
+								<goals>
+									<goal>undeploy</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<profile>
+			<id>weblogic-deploy-des-evo</id>
+			<properties>
+				<weblogic.admin.target>gido</weblogic.admin.target>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>weblogic-deploy-local</id>
+			<properties>
+				<weblogic.admin.target>AdminServer</weblogic.admin.target>
+			</properties>
+		</profile>
+	</profiles>
+</project>

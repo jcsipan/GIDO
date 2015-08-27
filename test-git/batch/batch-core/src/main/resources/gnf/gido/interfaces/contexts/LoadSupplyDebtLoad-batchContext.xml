@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch 
+		http://www.springframework.org/schema/batch/spring-batch-2.1.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx  
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+        
+    <context:annotation-config />
+    <tx:annotation-driven />
+        
+
+<!-- 	<import resource="classpath*:gnf/gps/facturacioncobro/contexts/basico-batchContext.xml"/> -->
+<!-- 	<import resource="classpath:/gnf/gps/facturacioncobro/common/log/gccbLogParentJob.xml" /> -->
+<!--     <import resource="classpath*:gnf/gps/facturacioncobro/facturacion/contexts/proxies-batchContext.xml" /> -->
+	
+   	 <!-- Persiste Unit Manager -->    
+<!--     <bean id="persistenceUnitManager" -->
+<!--         class="gnf.ada.core.persistence.jpa.MultiConfigAwarePersistenceUnitManager"> -->
+<!--         <property name="persistenceUnitName" value="persistence-ada" /> -->
+<!--         <property name="persistenceXmlLocations"> -->
+<!--             <list> -->
+<!--                 <value>classpath:META-INF/persistence/persistence-ada.xml</value> -->
+<!--                 <value>classpath*:META-INF/persistence/cobrofinanciacionfacturacion/persistence-ada-cobrofinanciacionfacturacion.xml</value> -->
+<!--                 <value>classpath:META-INF/persistence/comun/persistence-ada-comun.xml</value> -->
+<!--                 <value>classpath*:META-INF/persistence/**/persistence-ada-security.xml</value> -->
+<!--                 <value>classpath*:/META-INF/persistence/security/persistence-ada-security-dr.xml</value>                 -->
+<!--             </list> -->
+<!--         </property> -->
+<!--         <property name="defaultDataSource" ref="dataSource" /> -->
+<!--     </bean> 	 -->
+	           
+    <!-- Proxies Cobro -->
+<!--     <bean id="gccbCommonProxyCobros" -->
+<!--     	class="gnf.gps.facturacioncobro.cobro.serviciosexternoscobros.services.impl.GccbCommonProxyCollectionsImpl" /> -->
+	
+<!-- 	<!-- Adapters Cobro -->
+<!--     <bean id="gccbCommonAdapterCobros" -->
+<!--         class="gnf.gps.facturacioncobro.cobro.serviciosexternos.adapters.impl.GccbCommonAdapterCollectionsBatchImpl" /> -->
+        
+<!--     <bean id="gccbBankComponent" class="gnf.gps.facturacioncobro.cobro.cobrodomiciliado.services.business.impl.GccbBankImpl" /> -->
+<!-- 	<bean id="gccbBranchBankComponent" class="gnf.gps.facturacioncobro.cobro.cobrodomiciliado.services.business.impl.GccbBranchBankImpl" /> -->
+<!-- 	<bean id="gccbGroupingComponent" class="gnf.gps.facturacioncobro.cobro.cobrodomiciliado.services.business.impl.GccbGroupingImpl" /> -->
+        
+<!--     <bean id="bankDao" class="gnf.gps.facturacioncobro.cobro.persistence.dao.impl.BankDao" /> -->
+<!--     <bean id="branchBankDao" class="gnf.gps.facturacioncobro.cobro.persistence.dao.impl.BranchBankDao" /> -->
+<!--     <bean id="typeBankDao" class="gnf.gps.facturacioncobro.cobro.persistence.dao.impl.TypeBankDao" /> -->
+<!--     <bean id="groupingBankDao" class="gnf.gps.facturacioncobro.cobro.persistence.dao.impl.GroupingBankDao" /> -->
+<!-- 	<bean id="bankPresenterDao" class="gnf.gps.facturacioncobro.cobro.persistence.dao.impl.BankPresenterDao" /> -->
+<!-- 	<bean id="fileCompanyDao" class="gnf.gps.facturacioncobro.cobro.persistence.dao.impl.FileCompanyDao" />	 -->
+<!-- 	<bean id="accountDao" class="gnf.gps.facturacioncobro.cobro.persistence.dao.impl.AccountDao" /> -->
+	
+<!-- 	<!-- Herramientas Seguridad --> -->
+<!--     <bean id="gcbiSecurityHelper" class="gnf.gps.facturacioncobro.commons.base.GcbiSecurityHelper" /> -->
+    
+<!--      Helper para obtención de datos y manuipulación de procesos comunes de company -->
+<!--     <bean id="gcbiCompanyHelper" class="gnf.gps.facturacioncobro.facturacion.emisionfactura.services.internal.GcbiCompanyHelper" /> -->
+    
+<!-- 	<bean id="codeBatch" class="java.lang.String"> -->
+<!-- 		<constructor-arg value="${gccb.log.batchCode.greenBook}" /> -->
+<!-- 	</bean> -->
+	
+	
+</beans>
+	

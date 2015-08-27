@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+	<!-- Datasource configuration -->
+	<Resource name="gido-datasource" 
+			auth="Container" 
+			type="javax.sql.DataSource"
+			username="GIDO_ADMINIS" 
+			password="gido3007" 
+			driverClassName="oracle.jdbc.driver.OracleDriver"
+			url="jdbc:oracle:thin:@10.240.142.111:1522/ECAGEN"
+			maxActive="8"
+			validationQuery ="select 1 from dual"
+			maxIdle="4" />
+ 	
+
+	<!-- Notification system 
+	<Resource name="jms/ada-notification/connectionFactory"
+		auth="Container"
+		type="org.apache.activemq.ActiveMQConnectionFactory"
+		description="JMS Connection Factory"
+		factory="org.apache.activemq.jndi.JNDIReferenceFactory"
+		brokerURL="vm://localhost"
+		brokerName="LocalActiveMQBroker" />
+
+	<Resource name="jms/ada-notification/online"
+		auth="Container"
+		type="org.apache.activemq.command.ActiveMQTopic"
+		description="online topic"
+		factory="org.apache.activemq.jndi.JNDIReferenceFactory" 
+		physicalName="NOTIFICATION.ONLINE" />
+
+	<Resource name="jms/ada-notification/offline" 
+		auth="Container"
+		type="org.apache.activemq.command.ActiveMQQueue" 
+		description="offline queue"
+		factory="org.apache.activemq.jndi.JNDIReferenceFactory" 
+		physicalName="NOTIFICATION.OFFLINE" />	
+	-->
+	
+	<!-- Async Module 
+	<Resource name="jms/async/connectionFactory"
+		auth="Container"
+		type="org.apache.activemq.ActiveMQConnectionFactory"
+		description="JMS Connection Factory"
+		factory="org.apache.activemq.jndi.JNDIReferenceFactory"
+		brokerURL="vm://localhost"
+		brokerName="LocalActiveMQBroker" />
+	<Resource name="jms/ada-async" 
+		auth="Container"
+		type="org.apache.activemq.command.ActiveMQQueue" 
+		description="async queue"
+		factory="org.apache.activemq.jndi.JNDIReferenceFactory" 
+		physicalName="ADA.ASYNC" />
+	-->	
+ 
+</context>

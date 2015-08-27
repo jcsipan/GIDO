@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<about>
+	<system groupId="gnf.gido" artifactId="gido" architecture="${ada.architecture.version}" version="${project.version}" />
+	<modules>
+		<system groupId="gnf.gido" artifactId="gido-ui" version="${project.version}" />
+		<system groupId="gnf.gido" artifactId="gido-services" version="${project.version}" />
+		<system groupId="gnf.gido" artifactId="gido-persistence" version="${project.version}" />
+	</modules>
+</about>

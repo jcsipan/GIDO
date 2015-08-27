@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- menu for testing purposes -->
+<menu>
+	<node id="gido" label="gido.menu">
+		<node id="gido.administracion" label="gido.administracion"  >
+		 	<node id="gido.administracion.parametrosview" label="gido.administracion.parametrosview" link="gido.administracion.parametrosview" />
+		 	<node id="gido.administracion.interfaceview" label="gido.administracion.interfaceview" link="gido.administracion.interfaceview" />
+		 </node>		 		 
+	</node>
+</menu>
